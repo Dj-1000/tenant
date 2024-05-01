@@ -20,8 +20,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 SHARED_APPS = (
-    'tenant_schemas',  # mandatory, should always be before any django app
-    'client', # you must list the app where your tenant model resides in
+    'organization', # you must list the app where your tenant model resides in
 
     # everything below here is optional
     'django.contrib.auth',
@@ -35,22 +34,27 @@ TENANT_APPS = (
     'django.contrib.contenttypes',
 
     # your tenant-specific apps
-    'residence'
+    'locations',
+    'drivers',
+    'shipments'
     
 )
 # Application definition
 
 INSTALLED_APPS = (
     'tenant_schemas',
-    'customer',
+    'organization',
+    
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'residence',
+    'locations',
+    'drivers',
+    'shipments',
 )
 
 MIDDLEWARE = [
@@ -149,3 +153,7 @@ DATABASE_ROUTERS = (
     'tenant_schemas.routers.TenantSyncRouter',
 )
 TENANT_MODEL = "customers.Client"
+
+REST_FRAMEWORK = {
+    
+}
