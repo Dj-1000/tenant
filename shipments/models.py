@@ -6,4 +6,4 @@ class Shipment(models.Model):
     origin = models.ForeignKey(Location, on_delete=models.CASCADE)
     destination = models.ForeignKey(Location, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
-    completion = models.DateTimeField()
+    completion = models.DateTimeField(auto_now=True)

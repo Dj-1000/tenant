@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from .serializers import ShipmentSerializer
 from rest_framework.exceptions import ValidationError
 from.models import Shipment
+from django.forms import model_to_dict
 
 class ListShipment(generics.ListAPIView):
     queryset = Shipment.objects.all()
@@ -13,6 +14,8 @@ class ListShipment(generics.ListAPIView):
 class ShipmentView(APIView):
     def get(self,request,pk):
         obj = Shipment.objects.filter(id = pk).first()
+        ## may require to add model_to_dict here
+        ## dict_obj = model_to_dict(obj)
         if not obj:
             raise ValidationError({"shipment":"shipment does not exist"})
 
@@ -23,6 +26,7 @@ class ShipmentView(APIView):
         })
         
     def post(self,request):
+        
         seri = ShipmentSerializer(data = request.data)
         if seri.is_valid():
             seri.save()
