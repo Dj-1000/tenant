@@ -26,6 +26,10 @@ class ShipmentView(APIView):
         })
         
     def post(self,request):
+        payload = request.data
+        driver_id = payload.get("driver_id")
+        origin = payload.get("origin_id")
+        destination = payload.get("destination_id")
         
         seri = ShipmentSerializer(data = request.data)
         if seri.is_valid():

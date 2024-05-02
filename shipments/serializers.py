@@ -16,9 +16,9 @@ class ShipmentSerializer(serializers.ModelSerializer):
         
     def validate(self, validated_data):
         payload = validated_data
-        origin_id = payload.get("origin")
-        destination_id = payload.get("destination")
-        driver_id = payload.get("driver")
+        origin_id = payload.get("origin_id")
+        destination_id = payload.get("destination_id")
+        driver_id = payload.get("driver_id")
         if not Driver.objects.filter(id = driver_id).exists():
             raise ValidationError({"driver" : "invalid driver id"})
         
