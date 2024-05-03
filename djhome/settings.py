@@ -17,11 +17,11 @@ SECRET_KEY = 'django-insecure-y1pu0bm0eo7=%e45n#)rc&i65ex!5*rr^b=jibxkq-z%_dji+4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 SHARED_APPS = (
     'organization', # you must list the app where your tenant model resides in
-
+    'django.contrib.contenttypes',
     # everything below here is optional
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -32,7 +32,7 @@ SHARED_APPS = (
 
 TENANT_APPS = (
     'django.contrib.contenttypes',
-
+    'django.contrib.auth',
     # your tenant-specific apps
     'locations',
     'drivers',
@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -70,7 +71,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'djhome.urls'
-
+PUBLIC_SCHEMA_URLCONF = 'djhome.public_urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -83,7 +84,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-        },
+        }, 
     },
 ]
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -152,8 +153,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DATABASE_ROUTERS = (
     'tenant_schemas.routers.TenantSyncRouter',
 )
-TENANT_MODEL = "customers.Client"
+TENANT_MODEL = "organization.Organization"
 
 REST_FRAMEWORK = {
     
 }
+MEDIA_ROOT = '/data/media'
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+)

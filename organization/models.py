@@ -4,4 +4,4 @@ from tenant_schemas.models import TenantMixin
 class Organization(TenantMixin):
     org_name = models.CharField(max_length=100)    
     def __str__(self) -> str:
-        return self.name
+        return self.org_name
