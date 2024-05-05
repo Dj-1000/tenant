@@ -37,7 +37,16 @@ class OrganizationView(APIView):
             schema_name = schema,
             org_name = name
         )
-        
+        if org : 
+            return Response({
+                "status": status.HTTP_201_CREATED,
+                "result_message": "Organization created successfully"
+            })
+        else:
+            return Response({
+                "status": status.HTTP_400_BAD_REQUEST,
+                "result_message": "Organization creation failed"
+            })
         
         
         

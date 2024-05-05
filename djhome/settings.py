@@ -33,6 +33,9 @@ SHARED_APPS = (
 TENANT_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.auth',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.admin',
     # your tenant-specific apps
     'locations',
     'drivers',
@@ -166,3 +169,4 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
+PUBLIC_SCHEMA_NAME = 'public'
